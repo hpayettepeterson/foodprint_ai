@@ -1,48 +1,52 @@
+import requests
 import streamlit as st
+import datetime
+import pandas as pd
 
-'''
-# TaxiFareModel front
-'''
 
-st.markdown('''
-Remember that there are several ways to output content into your web page...
+############## LOADING SESSION #######################################
+complete_df = pd.read_csv("raw_data/temp_dishes_with_co2.csv")
 
-Either as with the title by just creating a string (or an f-string). Or as with this paragraph using the `st.` functions
-''')
 
-'''
-## Here we would like to add some controllers in order to ask the user to select the parameters of the ride
+#####################################################################
 
-1. Let's ask for:
-- date and time
-- pickup longitude
-- pickup latitude
-- dropoff longitude
-- dropoff latitude
-- passenger count
-'''
+st.markdown("""
+    # Welcome to **Foodprint.ai**! (Project with **<3** with **LE WAGON**)
 
-'''
-## Once we have these, let's call our API in order to retrieve a prediction
+    ## If you want to know the CO2 foodprint of your dish, upload a foto of your dish. Just get started!
 
-See ? No need to load a `model.joblib` file in this app, we do not even need to know anything about Data Science in order to retrieve a prediction...
+    **or** just type in the recipe below.
+""")
 
-🤔 How could we call our API ? Off course... The `requests` package 💡
-'''
+dish_selection = ["nothing"]
+dish_selection = st.multiselect( 'What dish do you want to eat?',  complete_df["dish_name"])
+#dish_number = st.slider('How many dishes?', 1, 10, 5)
+# variables
 
-url = 'https://taxifare.lewagon.ai/predict'
 
-if url == 'https://taxifare.lewagon.ai/predict':
 
-    st.markdown('Maybe you want to use your own API for the prediction, not the one provided by Le Wagon...')
+#st.write('You selected:', dish_selection[0])
+#st.write(temp_id, temp_ingredients, temp_weight_per_ingr, temp_total_dish_weight, temp_total_footprint, temp_dish_footprint_per_100gr, temp_confidence_score, temp_dish_footprint_per_kilo, temp_co2_score,temp_km_driven_per_100gr)
 
-'''
+if st.button('PRESS ME DAMN IT I CANNOT WAIT!'):
+    ### variables
+    temp_df = complete_df.loc[complete_df['dish_name'].isin(dish_selection)]
+    temp_id = temp_df["id"].values[0]
+    temp_ingredients = temp_df["ingredients"].values[0]
+    temp_weight_per_ingr = temp_df["weight_per_ingr"].values[0]
+    temp_total_dish_weight = temp_df["total_dish_weight"].values[0]
+    temp_total_footprint = temp_df["total_footprint"].values[0]
+    temp_dish_footprint_per_100gr = temp_df["dish_footprint_per_100gr"].values[0]
+    temp_confidence_score = temp_df["confidence_score"].values[0]
+    temp_dish_footprint_per_kilo = temp_df["dish_footprint_per_kilo"].values[0]
+    temp_co2_score = temp_df["co2_score"].values[0]
+    temp_km_driven_per_100gr = temp_df["km_driven_per_100gr"].values[0]
+    ## text 
+    st.write("ID: " + temp_id + " The ingredients are: " + temp_ingredients) 
+    st.write(" weight per ingredient: " + str(temp_weight_per_ingr)+ " Total dish weight: " +str(temp_total_dish_weight))
+    st.write(" total CO2 footprint is: " + str(temp_total_footprint) + " CO2 footprint per 100g is:  " + str(temp_dish_footprint_per_100gr) + " CO2 footprint per 1kg is : " + str(temp_dish_footprint_per_kilo)) 
+    st.write(" We are " + str(temp_confidence_score)  + " sure, " + "that our CO2 score of " + str(temp_co2_score) + " is correct.")
+    st.write(" Per 100g of this dish a car would have driven " + str(temp_km_driven_per_100gr)  + "km")
+else:
+    st.write('PRESS ME!')
 
-2. Let's build a dictionary containing the parameters for our API...
-
-3. Let's call our API using the `requests` package...
-
-4. Let's retrieve the prediction from the **JSON** returned by the API...
-
-## Finally, we can display the prediction to the user
-'''
