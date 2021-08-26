@@ -8,6 +8,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.pipeline import Pipeline
 from sklearn.neighbors import NearestNeighbors
 import pickle
+import joblib   
 
 
 def get_data(add_random_co2=False):
@@ -84,6 +85,9 @@ def save_n_neighbors_model(n_neighbors_model):
     # Export pipeline as pickle file
     with open("../models/nneighbors_model.pkl", "wb") as file:
         pickle.dump(n_neighbors_model, file)
+    
+    with open("../models/nneighbors_model.joblib", "wb") as file:
+        joblib.dump(n_neighbors_model, file)
 
 
 if __name__ == '__main__':
