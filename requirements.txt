@@ -3,6 +3,8 @@ pip>=9
 setuptools>=26
 twine
 wheel>=0.29
+git+git://github.com/chambliss/foodbert.git
+
 
 # data science
 numpy
@@ -25,5 +27,6 @@ s3fs
 # utilities
 six>=1.14
 joblib
+pickle
 memoized-property
 termcolor
