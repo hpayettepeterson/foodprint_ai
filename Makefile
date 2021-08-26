@@ -45,6 +45,9 @@ count_lines:
 #      UPLOAD PACKAGE TO PYPI
 # ----------------------------------
 PYPI_USERNAME=<AUTHOR>
+PACKAGE_NAME=foodprint.ai
+FILE_NAME=trainer
+
 build:
 	@python setup.py sdist bdist_wheel
 
@@ -53,3 +56,9 @@ pypi_test:
 
 pypi:
 	@twine upload dist/* -u $(PYPI_USERNAME)
+
+run_api:
+	uvicorn api.clusterapi:app --reload
+
+run_locally:
+	@python -m ${PACKAGE_NAME}.${FILE_NAME}

@@ -27,6 +27,9 @@ s3fs
 # utilities
 six>=1.14
 joblib
-pickle
 memoized-property
 termcolor
+
+# api
+fastapi
+uvicorn
