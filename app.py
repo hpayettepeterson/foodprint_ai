@@ -12,7 +12,7 @@ st.markdown("""
     # Welcome to **Foodprint.ai**! (Project with **<3** with **LE WAGON**)
     ## If you want to know the CO2 foodprint of your dish, upload a foto of your dish. Just get started!**or** just type in the recipe below.
 """)
-
+#s
 dish_selection = ["nothing"]
 dish_selection = st.multiselect( 'What dish do you want to eat?',  complete_df["dish_name"])
 dish_number = st.slider('How many dish recommendations you want to see?', 1, 10, 5)
