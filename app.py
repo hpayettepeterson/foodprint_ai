@@ -52,7 +52,13 @@ if st.button('PRESS ME DAMN IT I CANNOT WAIT!'):
     api_input_df=pd.DataFrame.from_dict(j_response["prediction"])
     #api_input_df["distance"] = api_input_df["distance"].apply(lambda x: x)
     #### Plotting the result
-    fig = px.scatter_3d(api_input_df, title="better choices", x='distance',y='marker_size',z='co2', size_max=18,hover_name='name', color='co2')
+    fig = px.scatter_3d(api_input_df, title="better choices", x='distance',y='marker_size',z='co2',
+                     labels={
+                     "distance": " ",
+                     "marker_size": " ",
+                     "co2": "co2 output per 100g"
+                 }, size_max=18,hover_name='name', color='co2')
+    fig.update_layout(showlegend=False)
     st.plotly_chart(fig)
 
 
